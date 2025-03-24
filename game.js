@@ -110,8 +110,31 @@ class Adventurer extends Character {
             }
         }
     }
-
-
+    // From part 6
+    //Create an additional method, duel(), for the Adventurer class 
+    duel(opponent) {
+        console.log(`${this.name} challenges ${opponent.name} to a duel!`);
+        // Repeat this process until one of the two adventurers reaches 50 health.
+        while (this.health > 50 && opponent.health > 50) {
+          //Use the roll() functionality to create opposing rolls for each adventurer.
+          const myRoll = super.roll();
+          const opponentRoll = opponent.roll();
+          //Subtract 1 from the adventurer with the lower roll.
+          if (myRoll > opponentRoll) {
+            opponent.health -= 1;
+            console.log(`${this.name} wins this round! (${this.name}'s Health: ${this.health}, ${opponent.name}'s Health: ${opponent.health})`);
+          } else if (opponentRoll > myRoll) {
+            this.health -= 1;
+            console.log(`${opponent.name} wins this round! (${this.name}'s Health: ${this.health}, ${opponent.name}'s Health: ${opponent.health})`);
+          } else {
+            console.log(" No health lost this round! ");
+          }
+        }
+    
+        const winner = this.health > 50 ? this : opponent;
+        console.log(`${winner.name} emerges victorious with ${winner.health} health remaining!`);
+      }
+  
 
 }
 
@@ -158,9 +181,12 @@ if (robin) {
     
     
     //Try the methodes
-   // robin.scout();
-   // robin.fight("a Monster");
-   // robin.escape();
+    robin.scout();
+    robin.fight("a Monster");
+    robin.escape();
+    const leo = new Adventurer("Leo", "Wizard");
+    robin.duel(leo);
+
       
 }
 
@@ -211,13 +237,11 @@ class AdventurerFactory {
   }
   
   
-  const healers = new AdventurerFactory("Healer");
-  const robin2 = healers.generate("Robin2"); // Create Robin
-  const leo = healers.generate("Leo"); // Create Leo
-  healers.listAll(); // List all healers
+//   const healers = new AdventurerFactory("Healer");
+//   const robin2 = healers.generate("Robin2"); // Create Robin
+//   const leo = healers.generate("Leo"); // Create Leo
+//   healers.listAll(); // List all healers
 
-/////////////////////////
-// Part 6: Developing Skills
 
   
 
