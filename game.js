@@ -242,6 +242,33 @@ class AdventurerFactory {
 //   const leo = healers.generate("Leo"); // Create Leo
 //   healers.listAll(); // List all healers
 
+///////////////////////////
+//Part 7: Adventure Forth//
+// Creat enemies using enemie class and methodes
+
+class Ennemie extends Character {
+    constructor(name, type, strength) {
+        super(name);
+        this.type = type; // Example: "Dragon", "Munster", "Vampire"
+        this.strength = strength; // Unique strength attribute
+    }
+
+    attack(target) {
+        const attackRoll = this.roll(this.strength); // Use creature’s strength as a modifier
+        console.log(`${this.name} the ${this.type} attacks ${target.name} with a roll of ${attackRoll}!`);
+        target.health -= attackRoll;
+        console.log(`${target.name}'s remaining health: ${target.health}`);
+    }
+
+    roar() {
+        console.log(`${this.name} roars mightily, intimidating everyone nearby!`);
+    }
+}
+
+// Create a dragon to interact with adventurers
+const smaug = new Ennemie("Volcano", "Dragon", 10);
+smaug.roar();
+smaug.attack(robin);
 
   
 
